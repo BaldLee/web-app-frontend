@@ -11,7 +11,7 @@
       <el-table-column prop="author" label="作者" sortable width="400"></el-table-column>
       <el-table-column prop="isbn" label="ISBN" sortable width="350"></el-table-column>
     </el-table>
-    <BookDetail :isvisible.sync="detailvisible"></BookDetail>
+    <BookDetail :thebook="booktoshow" :isvisible.sync="detailvisible"></BookDetail>
   </div>
 </template>
 
