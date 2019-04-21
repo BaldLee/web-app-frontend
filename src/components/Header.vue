@@ -37,15 +37,13 @@ export default {
     check() {
       var tmp;
       this.$http
-        .post("http://localhost:8082/books", {
+        .post("http://localhost:8082/ebook/books", {
           headers: {
             "Content-Type": "application/json"
           }
         })
         .then(response => {
-          console.log(response.data);
-          tmp = response.data;
-          alert(tmp);
+          console.log(response.data[0]);
         });
     }
   }

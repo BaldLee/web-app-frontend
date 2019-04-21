@@ -6,7 +6,7 @@
         <p>{{item.name}}</p>
       </div>
     </div>
-    <BookDetail :isvisible.sync="detailvisible"></BookDetail>
+    <BookDetail :thebook="booktoshow" :isvisible.sync="detailvisible"></BookDetail>
   </div>
 </template>
 
@@ -20,14 +20,35 @@ export default {
   },
   data: function() {
     return {
-      books: this.$global.books,
+      booktoshow: {
+        imgsrc: "",
+        name: "",
+        author: "",
+        isbn: ""
+      },
+      books: [],
       detailvisible: false
     };
   },
+  created() {
+    this.fetchdata();
+  },
   methods: {
     showdetail: function(book) {
-      this.$global.bookdetail = book;
+      this.booktoshow = book;
       this.detailvisible = true;
+    },
+    fetchdata: function() {
+      this.$http
+        .post("http://localhost:8082/ebook/books", {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then(response => {
+          this.books = response.data;
+          console.log(this.books);
+        });
     }
   }
 };
