@@ -28,7 +28,7 @@
 </template>
 <script>
 export default {
-  name: "BookView",
+  name: "BookEditor",
   props: {
     isvisible: {
       type: Boolean,
@@ -60,6 +60,11 @@ export default {
       }
     };
   },
+  // computed: {
+  //   book: function() {
+  //     return JSON.parse(JSON.stringify(this.thebook));
+  //   }
+  // },
   methods: {
     edit() {
       this.$http({
@@ -89,10 +94,10 @@ export default {
   watch: {
     isvisible: function() {
       this.visible = this.isvisible;
-      this.book = this.thebook;
+      this.book = JSON.parse(JSON.stringify(this.thebook));
     },
     thebook: function() {
-      this.book = this.thebook;
+      this.book = JSON.parse(JSON.stringify(this.thebook));
     }
   }
 };
