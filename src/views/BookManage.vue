@@ -14,7 +14,7 @@
       <el-table-column prop="price" label="价格" sortable width="150"></el-table-column>
       <el-table-column prop="isbn" label="ISBN" sortable width="250"></el-table-column>
     </el-table>
-    <BookEditor :thebook="booktoedit" :isvisible.sync="editorvisible"></BookEditor>
+    <BookEditor :thebook="booktoedit" :isvisible.sync="editorvisible" @listenChild="fetchdata"></BookEditor>
   </div>
 </template>
 
@@ -68,7 +68,7 @@ export default {
           this.bookintable = this.books;
           console.log(this.books);
         });
-    }
+    },
   },
   watch: {
     searchword: function() {
