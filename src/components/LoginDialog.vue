@@ -51,7 +51,7 @@ export default {
           this.visible = false;
         }
         if (result === 1) {
-          this.$router.push("/admin");
+          this.$router.push("/admin/bookmanage");
           this.$global.username = this.form.id;
           this.visible = false;
         }

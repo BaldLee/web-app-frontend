@@ -1,5 +1,5 @@
 <template>
-  <div class="search">
+  <div id="bookmanage">
     <input v-model="searchword" class="searchbar" placeholder=" Search...">
     <el-table
       :data="bookintable"
@@ -11,32 +11,33 @@
       <el-table-column prop="name" label="名称" sortable width="300"></el-table-column>
       <el-table-column prop="author" label="作者" sortable width="300"></el-table-column>
       <el-table-column prop="amount" label="库存" sortable width="150"></el-table-column>
-      <el-table-column prop="amount" label="价格" sortable width="150"></el-table-column>
+      <el-table-column prop="price" label="价格" sortable width="150"></el-table-column>
       <el-table-column prop="isbn" label="ISBN" sortable width="250"></el-table-column>
     </el-table>
-    <BookDetail :thebook="booktoshow" :isvisible.sync="detailvisible"></BookDetail>
+    <BookEditor :thebook="booktoedit" :isvisible.sync="editorvisible" @listenChild="fetchdata"></BookEditor>
   </div>
 </template>
 
 <script>
-import BookDetail from "@/components/BookDetail.vue";
+import BookEditor from "@/components/BookEditor.vue";
+
 export default {
-  name: "Search",
+  name: "BookManage",
   components: {
-    BookDetail
+    BookEditor
   },
   data: function() {
     return {
       searchword: "",
       books: [],
       bookintable: [],
-      booktoshow: {
+      booktoedit: {
         imgsrc: "",
         name: "",
         author: "",
         isbn: ""
       },
-      detailvisible: false
+      editorvisible: false
     };
   },
   created() {
@@ -46,14 +47,14 @@ export default {
     tableclick(row) {
       for (var i = 0; i < this.books.length; i++) {
         if (this.books[i].id === row.id) {
-          this.showdetail(this.books[i]);
+          this.showeditor(this.books[i]);
           return;
         }
       }
     },
-    showdetail: function(book) {
-      this.booktoshow = book;
-      this.detailvisible = true;
+    showeditor: function(book) {
+      this.booktoedit = book;
+      this.editorvisible = true;
     },
     fetchdata: function() {
       this.$http
@@ -67,7 +68,7 @@ export default {
           this.bookintable = this.books;
           console.log(this.books);
         });
-    }
+    },
   },
   watch: {
     searchword: function() {
