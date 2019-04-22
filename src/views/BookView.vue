@@ -47,7 +47,7 @@ export default {
         })
         .then(response => {
           this.books = response.data;
-          console.log(this.books);
+          // console.log(this.books);
         });
     }
   }

@@ -35,16 +35,15 @@ export default {
       this.dialogvisible = true;
     },
     check() {
-      var tmp;
-      this.$http
-        .post("http://localhost:8082/ebook/books", {
-          headers: {
-            "Content-Type": "application/json"
-          }
-        })
-        .then(response => {
-          console.log(response.data[0]);
-        });
+      var body = { username: "user1", password: "user1" };
+      this.$http({
+        method: "post",
+        url: "http://localhost:8082/ebook/test",
+        data: body
+      })
+      .then(response => {
+        console.log(response.data);
+      });
     }
   }
 };
