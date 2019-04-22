@@ -34,9 +34,30 @@ export default {
   },
   methods: {
     login: function() {
-      this.visible = false;
-      this.$global.username = this.form.id;
-      this.$router.push("/main/bookview");
+      var body = { username: this.form.id, password: this.form.pw };
+      this.$http({
+        method: "post",
+        url: "http://localhost:8082/ebook/user/check",
+        data: body
+      }).then(response => {
+        console.log("login response: " + response.data);
+        var result = response.data;
+        if (result === -1) {
+          alert("用户名或密码错误！");
+        }
+        if (result === 0) {
+          this.$router.push("/main/bookview");
+          this.$global.username = this.form.id;
+          this.visible = false;
+        }
+        if (result === 1) {
+          this.$router.push("/admin");
+          this.$global.username = this.form.id;
+          this.visible = false;
+        }
+      });
+      // this.$router.push("/main/bookview");
+      // this.visible = false;
     },
     closedialog: function() {
       this.$emit("update:isvisible", false);
