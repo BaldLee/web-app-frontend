@@ -9,9 +9,9 @@
     >
       <el-table-column prop="name" label="名称" sortable width="400"></el-table-column>
       <el-table-column prop="author" label="作者" sortable width="400"></el-table-column>
-      <el-table-column prop="ISBN" label="ISBN" sortable width="350"></el-table-column>
+      <el-table-column prop="isbn" label="ISBN" sortable width="350"></el-table-column>
     </el-table>
-    <BookDetail :isvisible.sync="detailvisible"></BookDetail>
+    <BookDetail :thebook="booktoshow" :isvisible.sync="detailvisible"></BookDetail>
   </div>
 </template>
 
@@ -25,23 +25,45 @@ export default {
   data: function() {
     return {
       searchword: "",
-      books: this.$global.books,
-      bookintable: this.$global.books,
+      books: [],
+      bookintable: [],
+      booktoshow: {
+        imgsrc: "",
+        name: "",
+        author: "",
+        isbn: ""
+      },
       detailvisible: false
     };
+  },
+  created() {
+    this.fetchdata();
   },
   methods: {
     tableclick(row) {
       for (var i = 0; i < this.books.length; i++) {
-        if (this.books[i].ISBN === row.ISBN) {
+        if (this.books[i].isbn === row.isbn) {
           this.showdetail(this.books[i]);
           return;
         }
       }
     },
     showdetail: function(book) {
-      this.$global.bookdetail = book;
+      this.booktoshow = book;
       this.detailvisible = true;
+    },
+    fetchdata: function() {
+      this.$http
+        .post("http://localhost:8082/ebook/books", {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then(response => {
+          this.books = response.data;
+          this.bookintable = this.books;
+          console.log(this.books);
+        });
     }
   },
   watch: {
