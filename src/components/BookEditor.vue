@@ -80,8 +80,8 @@ export default {
     // },
     edit() {
       this.$http({
-        method: post,
-        url: "localhost:8082/ebook/book/update",
+        method: "post",
+        url: "localhost:8082/ebook/books/update",
         data: this.book
       }).then(response => {
         console.log(response.data);
