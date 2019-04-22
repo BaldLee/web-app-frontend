@@ -4,12 +4,15 @@
     <el-table
       :data="bookintable"
       style="width: 100%"
-      :default-sort="{prop: 'name', order: 'descending'}"
+      :default-sort="{prop: 'id', order: 'ascending'}"
       @row-click="tableclick"
     >
-      <el-table-column prop="name" label="名称" sortable width="400"></el-table-column>
-      <el-table-column prop="author" label="作者" sortable width="400"></el-table-column>
-      <el-table-column prop="isbn" label="ISBN" sortable width="350"></el-table-column>
+      <el-table-column prop="id" label="ID" sortable width="100"></el-table-column>
+      <el-table-column prop="name" label="名称" sortable width="300"></el-table-column>
+      <el-table-column prop="author" label="作者" sortable width="300"></el-table-column>
+      <el-table-column prop="amount" label="库存" sortable width="150"></el-table-column>
+      <el-table-column prop="amount" label="价格" sortable width="150"></el-table-column>
+      <el-table-column prop="isbn" label="ISBN" sortable width="250"></el-table-column>
     </el-table>
     <BookDetail :thebook="booktoshow" :isvisible.sync="detailvisible"></BookDetail>
   </div>
@@ -42,7 +45,7 @@ export default {
   methods: {
     tableclick(row) {
       for (var i = 0; i < this.books.length; i++) {
-        if (this.books[i].isbn === row.isbn) {
+        if (this.books[i].id === row.id) {
           this.showdetail(this.books[i]);
           return;
         }

@@ -9,6 +9,8 @@
     <p>书名:{{book.name}}</p>
     <p>作者:{{book.author}}</p>
     <p>ISBN:{{book.isbn}}</p>
+    <p>价格:{{book.price}}</p>
+    <p>库存:{{book.amount}}</p>
     <el-button @click="addtocart(book)">添加至购物车</el-button>
   </el-dialog>
 </template>
