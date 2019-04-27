@@ -12,6 +12,7 @@
     <p>价格:{{book.price}}</p>
     <p>库存:{{book.amount}}</p>
     <p>简介：{{book.detail}}</p>
+    <el-input-number v-model="num" :min="1"></el-input-number>
     <el-button @click="addtocart(book)">添加至购物车</el-button>
   </el-dialog>
 </template>
@@ -28,6 +29,7 @@ export default {
       type: Object,
       default: function() {
         return {
+          id: 1,
           imgsrc: "",
           name: "",
           author: "",
@@ -38,6 +40,7 @@ export default {
   },
   data: function() {
     return {
+      num: 1,
       visible: this.isvisible,
       book: {
         imgsrc: "",
@@ -54,19 +57,19 @@ export default {
   methods: {
     addtocart(book) {
       for (var i = 0; i < this.$global.mycart.length; i++) {
-        if (this.$global.mycart[i] === book.id) {
+        if (this.$global.mycart[i].id === book.id) {
+          this.$global.mycart[i].orderamount += this.num;
           this.visible = false;
           this.$emit("update:isvisible", false);
-          alert("购物车中已存在该书！");
           return;
         }
       }
-      this.$global.mycart.push(book.id);
+      book = Object.assign({}, book, { orderamount: this.num });
+      this.$global.mycart.push(book);
       this.visible = false;
       this.$emit("update:isvisible", false);
     },
     fetchdata: function() {
-      console.log("this.thebook.id: " + this.thebook.id);
       this.$http({
         method: "post",
         headers: { "Content-Type": "application/json" },
