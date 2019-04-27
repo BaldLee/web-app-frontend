@@ -14,6 +14,7 @@
     <el-button @click="addtocart(book)">添加至购物车</el-button>
   </el-dialog>
 </template>
+
 <script>
 export default {
   name: "BookView",
@@ -48,14 +49,14 @@ export default {
   methods: {
     addtocart(book) {
       for (var i = 0; i < this.$global.mycart.length; i++) {
-        if (this.$global.mycart[i].isbn === book.isbn) {
+        if (this.$global.mycart[i] === book.id) {
           this.visible = false;
           this.$emit("update:isvisible", false);
           alert("购物车中已存在该书！");
           return;
         }
       }
-      this.$global.mycart.push(book);
+      this.$global.mycart.push(book.id);
       this.visible = false;
       this.$emit("update:isvisible", false);
     }
