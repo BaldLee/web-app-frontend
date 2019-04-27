@@ -9,7 +9,8 @@
     >
       <el-table-column prop="id" label="ID" sortable width="150"></el-table-column>
       <el-table-column prop="username" label="名称" sortable width="150"></el-table-column>
-      <el-table-column prop="roleString" label="权限" sortable width="150"></el-table-column>
+      <el-table-column prop="email" label="邮箱" sortable width="150"></el-table-column>
+      <el-table-column prop="roleString" label="权限" sortable width="250"></el-table-column>
       <el-table-column prop="password" label="密码密文" sortable width="600"></el-table-column>
     </el-table>
     <UserEditor :theuser="usertoedit" :isvisible.sync="editorvisible" @listenChild="fetchdata"></UserEditor>

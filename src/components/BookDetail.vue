@@ -11,6 +11,7 @@
     <p>ISBN:{{book.isbn}}</p>
     <p>价格:{{book.price}}</p>
     <p>库存:{{book.amount}}</p>
+    <p>简介：{{book.detail}}</p>
     <el-button @click="addtocart(book)">添加至购物车</el-button>
   </el-dialog>
 </template>
@@ -43,8 +44,12 @@ export default {
         name: "",
         author: "",
         isbn: ""
-      }
+      },
+      detail: ""
     };
+  },
+  created() {
+    this.fetchdata();
   },
   methods: {
     addtocart(book) {
@@ -59,6 +64,17 @@ export default {
       this.$global.mycart.push(book.id);
       this.visible = false;
       this.$emit("update:isvisible", false);
+    },
+    fetchdata: function() {
+      console.log("this.thebook.id: " + this.thebook.id);
+      this.$http({
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        url: "http://localhost:8082/ebook/books/findbyid",
+        data: this.thebook.id
+      }).then(reponse => {
+        this.book = reponse.data;
+      });
     }
   },
   watch: {
