@@ -55,6 +55,9 @@ export default {
           this.$global.username = this.form.id;
           this.visible = false;
         }
+        if (result === 2) {
+          alert("您的账号已被禁用！");
+        }
       });
       // this.$router.push("/main/bookview");
       // this.visible = false;
