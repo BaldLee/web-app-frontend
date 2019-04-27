@@ -29,7 +29,8 @@ export default {
   data: function() {
     return {
       cartid: [],
-      cart: []
+      cart: [],
+      fresh: 0
       // iscartempty: 0
     };
   },
@@ -41,19 +42,7 @@ export default {
   //   }
   // },
   created() {
-    for (var i = 0; i < this.$global.mycart.length; i++) {
-      var id = this.$global.mycart[i];
-      this.cartid.push(id);
-      this.$http({
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        url: "http://localhost:8082/ebook/books/findbyid",
-        data: id
-      }).then(response => {
-        console.log(response.data);
-        this.cart.push(response.data);
-      });
-    }
+    this.fetchdata();
   },
   methods: {
     cartdelete(book) {
@@ -72,10 +61,11 @@ export default {
     submit: function() {
       var request = {
         cartid: [],
-        ownerId: ""
+        ownerName: ""
       };
-      request.ownerId = this.$global.userid;
+      request.ownerName = this.$global.username;
       request.cartid = this.cartid;
+      console.log("request: " + JSON.stringify(request));
       this.$http({
         method: "post",
         header: { "Content-Type": "application/json" },
@@ -86,8 +76,29 @@ export default {
         if (response.data === "order add done") {
           this.$global.mycart = [];
           this.cartid = this.$global.mycart;
+          this.fresh++;
         }
       });
+    },
+    fetchdata: function() {
+      for (var i = 0; i < this.$global.mycart.length; i++) {
+        var id = this.$global.mycart[i];
+        this.cartid.push(id);
+        this.$http({
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          url: "http://localhost:8082/ebook/books/findbyid",
+          data: id
+        }).then(response => {
+          console.log(response.data);
+          this.cart.push(response.data);
+        });
+      }
+    }
+  },
+  watch: {
+    fresh: function() {
+      this.fetchdata();
     }
   }
 };

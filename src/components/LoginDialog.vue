@@ -47,12 +47,12 @@ export default {
         }
         if (result === 0) {
           this.$router.push("/main/bookview");
-          this.$global.userid = this.form.id;
+          this.$global.username = this.form.id;
           this.visible = false;
         }
         if (result === 1) {
           this.$router.push("/admin/bookmanage");
-          this.$global.userid = this.form.id;
+          this.$global.username = this.form.id;
           this.visible = false;
         }
       });

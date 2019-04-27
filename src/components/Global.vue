@@ -1,8 +1,8 @@
 <script>
-var userid = "";
+var username = "";
 var mycart = [];
 export default {
-  userid,
+  username,
   mycart
 };
 </script>
