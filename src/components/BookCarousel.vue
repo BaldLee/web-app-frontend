@@ -1,8 +1,8 @@
 <template>
   <div id="carousel">
     <el-carousel height="600px">
-      <el-carousel-item v-for="item in books" :key="item.no">
-        <h3>{{ item.no }}</h3>
+      <el-carousel-item v-for="item in books" :key="item.id">
+        <h3>{{ item.id }}</h3>
         <img :src="item.imgsrc" alt="a" height="360px">
       </el-carousel-item>
     </el-carousel>
@@ -14,12 +14,26 @@ export default {
   name: "BookCarousel",
   data: function() {
     return {
-      books:this.$global.books, 
+      books: []
     };
   },
-  methods: {
+  created() {
+    this.fetchdata();
   },
-  computed: {}
+  methods: {
+    fetchdata: function() {
+      this.$http
+        .post("http://localhost:8082/ebook/books/getall", {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then(response => {
+          this.books = response.data;
+          console.log(this.books);
+        });
+    }
+  },
 };
 </script>
 
