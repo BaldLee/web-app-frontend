@@ -1,6 +1,6 @@
 <template>
   <div class="mycart">
-    <div class="cartcol" v-for="item in cart" :key="item.no">
+    <div class="cartcol" v-for="item in cart" :key="item.id">
       <div class="cartimg">
         <img :src="item.imgsrc" height="240px">
       </div>
@@ -28,9 +28,9 @@ export default {
   name: "MyCart",
   data: function() {
     return {
-      cartid: [],
-      cart: [],
-      fresh: 0
+      cartId: [],
+      cart: []
+      // fresh: 0
       // iscartempty: 0
     };
   },
@@ -60,11 +60,11 @@ export default {
     },
     submit: function() {
       var request = {
-        cartid: [],
+        cartId: [],
         ownerName: ""
       };
       request.ownerName = this.$global.username;
-      request.cartid = this.cartid;
+      request.cartId = this.cartId;
       console.log("request: " + JSON.stringify(request));
       this.$http({
         method: "post",
@@ -75,15 +75,16 @@ export default {
         console.log(response.data);
         if (response.data === "order add done") {
           this.$global.mycart = [];
-          this.cartid = this.$global.mycart;
-          this.fresh++;
+          this.cartId = this.$global.mycart;
+          this.clear();
         }
       });
     },
     fetchdata: function() {
+      var tmpcart = [];
       for (var i = 0; i < this.$global.mycart.length; i++) {
         var id = this.$global.mycart[i];
-        this.cartid.push(id);
+        this.cartId.push(id);
         this.$http({
           method: "post",
           headers: { "Content-Type": "application/json" },
@@ -91,14 +92,10 @@ export default {
           data: id
         }).then(response => {
           console.log(response.data);
-          this.cart.push(response.data);
+          tmpcart.push(response.data);
         });
       }
-    }
-  },
-  watch: {
-    fresh: function() {
-      this.fetchdata();
+      this.cart = tmpcart;
     }
   }
 };
