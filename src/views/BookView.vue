@@ -21,6 +21,7 @@ export default {
   data: function() {
     return {
       booktoshow: {
+        id:1,
         imgsrc: "",
         name: "",
         author: "",
@@ -47,7 +48,6 @@ export default {
         })
         .then(response => {
           this.books = response.data;
-          // console.log(this.books);
         });
     }
   }

@@ -7,6 +7,9 @@
       <el-form-item class="input" label="密码">
         <el-input v-model="newuser.password" type="password"></el-input>
       </el-form-item>
+      <el-form-item class="input" label="邮箱">
+        <el-input v-model="newuser.email"></el-input>
+      </el-form-item>
       <el-form-item>
         <el-button @click="adduser">添加</el-button>
       </el-form-item>
@@ -22,6 +25,8 @@ export default {
       newuser: {
         username: "",
         password: "",
+        email: "",
+        status: 1,
         role: 0
       }
     };
@@ -39,7 +44,7 @@ export default {
         url: "http://localhost:8082/ebook/users/add",
         data: this.newuser
       }).then(response => {
-        console.log("add done: " + response.data);
+        console.log("add done: " + JSON.stringify(response.data));
         this.reset();
       });
     },
