@@ -1,18 +1,24 @@
 <template>
   <div class="mycart">
-    <div class="cartcol" v-for="item in cart" :key="item.no">
+    <div class="cartcol" v-for="(item,index) in cart" :key="index">
       <div class="cartimg">
         <img :src="item.imgsrc" height="240px">
       </div>
       <div class="cartinfo">
         <p>书名:{{item.name}}</p>
         <p>作者:{{item.author}}</p>
-        <p>ISBN:{{item.ISBN}}</p>
+        <p>ISBN:{{item.isbn}}</p>
+        <p>价格:{{item.price}}</p>
+        <span>数量：{{item.orderamount}}</span>
       </div>
       <div class="cartbutton">
         <el-button @click="cartdelete(item)">删除</el-button>
       </div>
       <div style="clear:both"></div>
+    </div>
+    <div>
+      <el-button @click="clear">清空</el-button>
+      <el-button @click="submit">提交订单</el-button>
     </div>
   </div>
 </template>
@@ -22,18 +28,50 @@ export default {
   name: "MyCart",
   data: function() {
     return {
-      isempty: true,
-      cart: this.$global.mycart
+      cart: []
     };
+  },
+  created() {
+    this.fetchdata();
   },
   methods: {
     cartdelete(book) {
       for (var i = 0; i < this.$global.mycart.length; i++) {
-        if (this.$global.mycart[i].ISBN === book.ISBN) {
+        if (this.$global.mycart[i].id === book.id) {
           this.$global.mycart.splice(i, 1);
           return;
         }
       }
+      this.fetchdata();
+    },
+    clear: function() {
+      this.$global.mycart = [];
+      this.cart = this.$global.mycart;
+    },
+    submit: function() {
+      var request = {
+        cartId: [],
+        cartAmount: [],
+        ownerName: ""
+      };
+      request.ownerName = this.$global.username;
+      for (var i = 0; i < this.$global.mycart.length; i++) {
+        request.cartId.push(this.$global.mycart[i].id);
+        request.cartAmount.push(this.$global.mycart[i].orderamount);
+      }
+      console.log(JSON.stringify(request));
+      this.$http({
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        url: "http://localhost:8082/ebook/orders/add",
+        data: JSON.stringify(request)
+      }).then(response => {
+        if (response.data === "order add done") {
+          this.clear();
+        }
+      });
+    },
+    fetchdata: function() {
       this.cart = this.$global.mycart;
     }
   }

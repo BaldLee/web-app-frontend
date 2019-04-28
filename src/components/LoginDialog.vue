@@ -37,7 +37,7 @@ export default {
       var body = { username: this.form.id, password: this.form.pw };
       this.$http({
         method: "post",
-        url: "http://localhost:8082/ebook/user/check",
+        url: "http://localhost:8082/ebook/users/check",
         data: body
       }).then(response => {
         console.log("login response: " + response.data);
@@ -51,9 +51,12 @@ export default {
           this.visible = false;
         }
         if (result === 1) {
-          this.$router.push("/admin");
+          this.$router.push("/admin/bookmanage");
           this.$global.username = this.form.id;
           this.visible = false;
+        }
+        if (result === 2) {
+          alert("您的账号已被禁用！");
         }
       });
       // this.$router.push("/main/bookview");

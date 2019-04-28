@@ -7,6 +7,12 @@ import BookView from './views/BookView.vue'
 import Search from './views/Search.vue'
 import MyCart from './views/MyCart.vue'
 import Order from './views/Order.vue'
+import AddBook from './views/AddBook.vue'
+import UserManage from './views/UserManage.vue'
+import AddUser from './views/AddUser.vue'
+import OrderManage from './views/OrderManage.vue'
+import BookManage from './views/BookManage.vue'
+import Statistic from './views/Statistic.vue'
 
 Vue.use(Router)
 
@@ -42,13 +48,45 @@ export default new Router({
           path: 'order',
           name: 'Order',
           component: Order
+        },
+        {
+          path: 'statistic',
+          name: 'statistic',
+          component: Statistic
         }
       ]
     },
     {
-      path: "/admin",
-      name: "Admin",
-      component: Admin
+      path: '/admin',
+      name: 'Admin',
+      component: Admin,
+      children: [
+        {
+          path: 'bookmanage',
+          name: 'BookManage',
+          component: BookManage
+        },
+        {
+          path: 'addbook',
+          name: 'AddBook',
+          component: AddBook
+        },
+        {
+          path: 'usermanage',
+          name: 'UserManage',
+          component: UserManage
+        },
+        {
+          path: 'adduser',
+          name: 'AddUser',
+          component: AddUser
+        },
+        {
+          path: 'ordermanage',
+          name: 'OrderManage',
+          component: OrderManage
+        },
+      ]
     }
   ]
 })

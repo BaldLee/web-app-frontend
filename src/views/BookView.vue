@@ -21,6 +21,7 @@ export default {
   data: function() {
     return {
       booktoshow: {
+        id:1,
         imgsrc: "",
         name: "",
         author: "",
@@ -40,14 +41,13 @@ export default {
     },
     fetchdata: function() {
       this.$http
-        .post("http://localhost:8082/ebook/books", {
+        .post("http://localhost:8082/ebook/books/getall", {
           headers: {
             "Content-Type": "application/json"
           }
         })
         .then(response => {
           this.books = response.data;
-          // console.log(this.books);
         });
     }
   }

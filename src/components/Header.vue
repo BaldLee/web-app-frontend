@@ -2,21 +2,24 @@
   <div class="Header-login">
     <img id="logo" src="https://pt.sjtu.edu.cn/picbucket/142226_155192404061.png" alt>
     <span id="headtitle">e-book store</span>
-    <div v-if="loginvisible">
+    <div v-if="dialogvisible">
       <el-button @click="loginbutton">登录</el-button>
-      <el-button @click="check">检查</el-button>
-      <LoginDialog :isvisible.sync="dialogvisible"></LoginDialog>
+      <el-button @click="registerbutton">注册</el-button>
+      <LoginDialog :isvisible.sync="loginvisible"></LoginDialog>
+      <RegisterDialog :isvisible.sync="registervisible"></RegisterDialog>
     </div>
   </div>
 </template>
 
 <script>
 import LoginDialog from "@/components/LoginDialog.vue";
+import RegisterDialog from "@/components/RegisterDialog.vue";
 
 export default {
   name: "Header",
   components: {
-    LoginDialog
+    LoginDialog,
+    RegisterDialog
   },
   props: {
     login: {
@@ -26,24 +29,28 @@ export default {
   },
   data: function() {
     return {
-      dialogvisible: false,
-      loginvisible: this.login
+      dialogvisible: this.login,
+      registervisible: false,
+      loginvisible: false
     };
   },
   methods: {
     loginbutton() {
-      this.dialogvisible = true;
+      this.loginvisible = true;
     },
-    check() {
-      var body = { username: "user1", password: "user1" };
-      this.$http({
-        method: "post",
-        url: "http://localhost:8082/ebook/test",
-        data: body
-      })
-      .then(response => {
-        console.log(response.data);
-      });
+    // check() {
+    //   var body = { username: "user1", password: "user1" };
+    //   this.$http({
+    //     method: "post",
+    //     url: "http://localhost:8082/ebook/test",
+    //     data: body
+    //   })
+    //   .then(response => {
+    //     console.log(response.data);
+    //   });
+    // }
+    registerbutton() {
+      this.registervisible = true;
     }
   }
 };
