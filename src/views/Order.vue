@@ -6,21 +6,30 @@
         :data="orders"
         style="width: 100%"
         :default-sort="{prop: 'id', order: 'descending'}"
+        @row-click="tableclick"
       >
         <el-table-column prop="id" label="订单号" sortable width="300"></el-table-column>
         <el-table-column prop="time" label="时间" sortable width="300"></el-table-column>
       </el-table>
     </template>
+    <OrderDialog :isvisible.sync="detailvisible" :orderid="ordertoshow"></OrderDialog>
   </div>
 </template>
 
 <script>
+import OrderDialog from "@/components/OrderDialog.vue";
+
 export default {
   name: "Order",
+  components: {
+    OrderDialog
+  },
   data: function() {
     return {
       searchword: "",
-      order: []
+      order: [],
+      detailvisible: false,
+      ordertoshow: 1
     };
   },
   computed: {
@@ -40,20 +49,19 @@ export default {
   },
   methods: {
     fetchdata: function() {
-      // this.$http({
-      //   method: "post",
-      //   headers: { "Content-Type": "application/json" },
-      //   url: "http://localhost:8082/ebook/orders/getall"
-      // }).then(reponse => {
-      //   this.order = response.data;
-      // });
-      this.$http
-        .post("http://localhost:8082/ebook/orders/getall", {
-          headers: { "Content-Type": "application/json" }
-        })
-        .then(response => {
-          this.order = response.data;
-        });
+      var username = this.$global.username;
+      this.$http({
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        url: "http://localhost:8082/ebook/orders/findbyusername",
+        data: username
+      }).then(response => {
+        this.order = response.data;
+      });
+    },
+    tableclick(row) {
+      this.ordertoshow = row.id;
+      this.detailvisible = true;
     }
   }
 };

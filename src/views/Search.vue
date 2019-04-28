@@ -11,7 +11,7 @@
       <el-table-column prop="name" label="名称" sortable width="300"></el-table-column>
       <el-table-column prop="author" label="作者" sortable width="300"></el-table-column>
       <el-table-column prop="amount" label="库存" sortable width="150"></el-table-column>
-      <el-table-column prop="amount" label="价格" sortable width="150"></el-table-column>
+      <el-table-column prop="price" label="价格" sortable width="150"></el-table-column>
       <el-table-column prop="isbn" label="ISBN" sortable width="250"></el-table-column>
     </el-table>
     <BookDetail :thebook="booktoshow" :isvisible.sync="detailvisible"></BookDetail>

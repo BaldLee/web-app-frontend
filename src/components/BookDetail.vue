@@ -3,7 +3,7 @@
     class="bookdetail"
     :visible.sync="visible"
     title="详情"
-    @close="$emit('update:isvisible', false)"
+    @close="$emit('update:isvisible', false);"
   >
     <img :src="book.imgsrc" style="height:240px">
     <p>书名:{{book.name}}</p>
@@ -61,6 +61,7 @@ export default {
           this.$global.mycart[i].orderamount += this.num;
           this.visible = false;
           this.$emit("update:isvisible", false);
+          this.num = 1;
           return;
         }
       }
@@ -68,6 +69,7 @@ export default {
       this.$global.mycart.push(book);
       this.visible = false;
       this.$emit("update:isvisible", false);
+      this.num = 1;
     },
     fetchdata: function() {
       this.$http({
