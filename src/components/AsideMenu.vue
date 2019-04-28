@@ -18,6 +18,10 @@
           <i class="el-icon-menu"></i>
           <span slot="title">订单管理</span>
         </el-menu-item>
+        <el-menu-item index="5" @click="toStatistic">
+          <i class="el-icon-menu"></i>
+          <span slot="title">订单统计</span>
+        </el-menu-item>
       </el-menu>
     </el-col>
   </div>
@@ -41,6 +45,9 @@ export default {
     },
     toOrder: function() {
       this.$router.push("/main/order");
+    },
+    toStatistic: function() {
+      this.$router.push("/main/statistic");
     }
   }
 };

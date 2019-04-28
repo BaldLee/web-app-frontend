@@ -12,6 +12,7 @@ import UserManage from './views/UserManage.vue'
 import AddUser from './views/AddUser.vue'
 import OrderManage from './views/OrderManage.vue'
 import BookManage from './views/BookManage.vue'
+import Statistic from './views/Statistic.vue'
 
 Vue.use(Router)
 
@@ -47,6 +48,11 @@ export default new Router({
           path: 'order',
           name: 'Order',
           component: Order
+        },
+        {
+          path: 'statistic',
+          name: 'statistic',
+          component: Statistic
         }
       ]
     },
