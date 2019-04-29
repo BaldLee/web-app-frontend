@@ -20,6 +20,10 @@
         </span>
       </div>
     </div>
+    <p>
+      <b>总价：</b>
+      {{total}}
+    </p>
   </el-dialog>
 </template>
 
@@ -51,7 +55,7 @@ export default {
   data: function() {
     return {
       visible: this.isvisible,
-      order:this.orderid,
+      order: this.orderid,
       items: {
         book: {
           name: "",
@@ -61,6 +65,15 @@ export default {
         amount: 0
       }
     };
+  },
+  computed: {
+    total: function() {
+      var result = 0;
+      for (var i = 0; i < this.items.length; i++) {
+        result += this.items[i].book.price * this.items[i].amount;
+      }
+      return result;
+    }
   },
   methods: {
     fetchdata() {
