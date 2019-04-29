@@ -66,8 +66,14 @@ export default {
         url: "http://localhost:8082/ebook/orders/add",
         data: JSON.stringify(request)
       }).then(response => {
+        var t = /too much:.*/;
         if (response.data === "order add done") {
           this.clear();
+        }
+        if (t.test(response.data)) {
+          // var bookname = response.data.match(/too much:(\S*)/)[1];
+          // console.log(bookname);
+          alert(response.data);
         }
       });
     },

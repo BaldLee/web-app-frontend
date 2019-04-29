@@ -6,7 +6,7 @@ import store from './store'
 import global_ from "@/components/Global.vue";
 import axios from 'axios';
 
-axios.defaults.baseURL = "http://localhost:8080/"
+axios.defaults.baseURL = "http://localhost:8082/"
 Vue.prototype.$http = axios
 Vue.prototype.$global = global_;
 Vue.config.productionTip = false

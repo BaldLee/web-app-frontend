@@ -5,7 +5,7 @@
       <el-table
         :data="orders"
         style="width: 100%"
-        :default-sort="{prop: 'id', order: 'descending'}"
+        :default-sort="{prop: 'id', order: 'ascending'}"
         @row-click="tableclick"
       >
         <el-table-column prop="id" label="订单号" sortable width="300"></el-table-column>
