@@ -13,7 +13,7 @@
         <el-table-column prop="time" label="时间" sortable width="300"></el-table-column>
       </el-table>
     </template>
-    <!-- <OrderDialog :isvisible.sync="detailvisible" :orderid="ordertoshow"></OrderDialog> -->
+    <OrderDialog :isvisible.sync="detailvisible" :orderid="ordertoshow"></OrderDialog>
   </div>
 </template>
 
@@ -92,4 +92,9 @@ export default {
 </script>
 
 <style scoped>
+.searchbar {
+  width: 200px;
+  float: left;
+  margin: 10px;
+}
 </style>

@@ -62,9 +62,9 @@ export default {
       console.log(JSON.stringify(request));
       this.$http({
         method: "post",
-        headers: { "Content-Type": "application/json" },
         url: "http://localhost:8082/ebook/orders/add",
-        data: JSON.stringify(request)
+        headers: { "Content-Type": "application/json" },
+        data: request
       }).then(response => {
         var t = /too much:.*/;
         if (response.data === "order add done") {
