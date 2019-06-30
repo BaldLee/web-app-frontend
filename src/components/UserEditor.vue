@@ -15,6 +15,9 @@
       <el-form-item label="密码">
         <el-input v-model="user.password" type="password"></el-input>
       </el-form-item>
+      <el-form-item label="邮箱">
+        <el-input v-model="user.email"></el-input>
+      </el-form-item>
       <el-form-item>
         <el-button @click="deleteuser">删除</el-button>
         <el-button @click="edit">修改</el-button>
@@ -36,7 +39,8 @@ export default {
         return {
           id: "",
           username: "",
-          password: ""
+          password: "",
+          email: ""
         };
       }
     }
@@ -47,7 +51,8 @@ export default {
       user: {
         id: "",
         username: "",
-        password: ""
+        password: "",
+        email: ""
       }
     };
   },
@@ -61,6 +66,7 @@ export default {
       this.$http({
         method: "post",
         url: "http://localhost:8082/ebook/users/update",
+        headers: { "Content-Type": "application/json" },
         data: this.user
       }).then(response => {
         console.log("user update: " + response.data);
@@ -73,7 +79,8 @@ export default {
       this.$http({
         method: "post",
         url: "http://localhost:8082/ebook/users/delete",
-        data: this.user
+        headers: { "Content-Type": "application/json" },
+        data: this.user.id
       }).then(response => {
         console.log("user delete " + response.data);
         this.$emit("listenChild");

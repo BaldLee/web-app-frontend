@@ -70,6 +70,7 @@ export default {
       this.$http({
         method: "post",
         url: "http://localhost:8082/ebook/books/update",
+        headers: { "Content-Type": "application/json" },
         data: this.book
       }).then(response => {
         console.log("book update: " + response.data);
@@ -82,7 +83,8 @@ export default {
       this.$http({
         method: "post",
         url: "http://localhost:8082/ebook/books/delete",
-        data: this.book
+        headers: { "Content-Type": "application/json" },
+        data: this.book.id
       }).then(response => {
         console.log("book delete " + response.data);
         this.$emit("listenChild");

@@ -63,7 +63,21 @@ export default {
       this.ordertoshow = row.id;
       this.detailvisible = true;
     }
-  }
+  },
+  // watch: {
+  //   searchword: function() {
+  //     this.bookintable = [];
+  //     for (var i = 0; i < this.books.length; i++) {
+  //       if (
+  //         this.books[i].name
+  //           .toLowerCase()
+  //           .indexOf(this.searchword.toLowerCase()) > -1
+  //       ) {
+  //         this.bookintable.push(this.books[i]);
+  //       }
+  //     }
+  //   }
+  // }
 };
 </script>
 
