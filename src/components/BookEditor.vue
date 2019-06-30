@@ -5,7 +5,15 @@
     title="编辑"
     @close="$emit('update:isvisible', false)"
   >
-    <img :src="'http://localhost:8082/ebook/image/' + book.imgId" style="height:240px">
+    <el-upload
+      class="image-uploader"
+      action="http://localhost:8082/ebook/image/upload"
+      name="image"
+      :show-file-list="false"
+      :on-success="handleSuccess"
+    >
+      <img v-if="imageUrl" :src="imageUrl" class="cover">
+    </el-upload>
     <el-form ref="form" :model="book">
       <el-form-item label="书名">
         <el-input v-model="book.name"></el-input>
@@ -57,7 +65,8 @@ export default {
         amount: "",
         id: 0,
         price: 0
-      }
+      },
+      imageUrl: ""
     };
   },
   methods: {
@@ -86,15 +95,23 @@ export default {
       });
       this.visible = false;
       this.$emit("update:isvisible", false);
+    },
+    handleSuccess(res,file) {
+      console.log(res);
+      alert("图片上传成功");
+      this.imageUrl = URL.createObjectURL(file.raw);
+      this.book.imgId = res.slice(19);
     }
   },
   watch: {
     isvisible: function() {
       this.visible = this.isvisible;
       this.book = JSON.parse(JSON.stringify(this.thebook));
+      this.imageUrl = "http://localhost:8082/ebook/image/" + this.book.imgId;
     },
     thebook: function() {
       this.book = JSON.parse(JSON.stringify(this.thebook));
+      this.imageUrl = "http://localhost:8082/ebook/image/" + this.book.imgId;
     }
   }
 };
@@ -104,5 +121,28 @@ export default {
   color: #333;
   text-align: center;
   line-height: 50px;
+}
+.image-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.image-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.image-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.cover {
+  width: 178px;
+  height: 178px;
+  display: block;
 }
 </style>
