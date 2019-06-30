@@ -21,7 +21,7 @@ export default {
   data: function() {
     return {
       booktoshow: {
-        id:1,
+        id: 1,
         imgId: "",
         name: "",
         author: "",
@@ -57,14 +57,16 @@ export default {
 <style scoped>
 .onebook {
   text-align: center;
-  width: 240px;
+  width: 220px;
+  height: 320px;
   line-height: 20px;
   float: left;
-  margin-right: 50px;
-  margin-left: 30px;
+  padding-right: 50px;
+  padding-left: 30px;
+  padding-top: 30px;
 }
 .viewbookimg {
-  height: 240px;
+  width: 180px;
   margin: 0;
   padding: 0;
 }
