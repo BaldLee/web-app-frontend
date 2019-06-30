@@ -1,9 +1,9 @@
 <template>
   <div id="carousel">
     <el-carousel height="600px">
-      <el-carousel-item v-for="item in books" :key="item.id">
+      <el-carousel-item v-for="item in books" :key="item.imgId">
         <h3>{{ item.id }}</h3>
-        <img :src="item.imgsrc" alt="a" height="360px">
+        <img :src="'http://localhost:8082/ebook/image/' + item.imgId" alt="a" height="360px">
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -23,7 +23,7 @@ export default {
   methods: {
     fetchdata: function() {
       this.$http
-        .post("http://localhost:8082/ebook/books/getall", {
+        .post("/ebook/books/getall", {
           headers: {
             "Content-Type": "application/json"
           }
@@ -33,7 +33,7 @@ export default {
           console.log(this.books);
         });
     }
-  },
+  }
 };
 </script>
 

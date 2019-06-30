@@ -92,7 +92,7 @@ export default {
           };
           this.$http({
             method: "post",
-            url: "http://localhost:8082/ebook/users/add",
+            url: "/ebook/users/add",
             data: newUser
           }).then(response => {
             console.log("add done: " + JSON.stringify(response.data));

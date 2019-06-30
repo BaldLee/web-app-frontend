@@ -7,7 +7,7 @@
   >
     <div class="itemscol" v-for="(item,index) in items" :key="index">
       <div class="itemsimg">
-        <img :src="item.book.imgsrc" height="40px">
+        <img :src="'http://localhost:8082/ebook/image/' + item.book.imgId" height="40px">
       </div>
       <div class="itemsinfo">
         <span>
@@ -60,7 +60,7 @@ export default {
         book: {
           name: "",
           price: "",
-          imgsrc: ""
+          imgId: ""
         },
         amount: 0
       }
@@ -80,7 +80,7 @@ export default {
       this.$http({
         method: "post",
         headers: { "Content-Type": "application/json" },
-        url: "http://localhost:8082/ebook/orderitems/findbooksbyorderid",
+        url: "/ebook/orderitems/findbooksbyorderid",
         data: this.order
       }).then(response => {
         this.items = response.data;

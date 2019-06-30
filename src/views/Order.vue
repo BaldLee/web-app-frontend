@@ -53,7 +53,7 @@ export default {
       this.$http({
         method: "post",
         headers: { "Content-Type": "application/json" },
-        url: "http://localhost:8082/ebook/orders/findbyusername",
+        url: "/ebook/orders/findbyusername",
         data: username
       }).then(response => {
         this.order = response.data;

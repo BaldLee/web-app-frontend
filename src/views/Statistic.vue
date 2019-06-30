@@ -44,7 +44,7 @@ export default {
       this.$http({
         method: "post",
         headers: { "Content-Type": "application/json" },
-        url: "http://localhost:8082/ebook/orders/addbytime",
+        url: "/ebook/orders/addbytime",
         data: request
       }).then(response => {
         this.money = response.data;

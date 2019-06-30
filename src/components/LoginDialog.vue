@@ -37,7 +37,7 @@ export default {
       var body = { username: this.form.id, password: this.form.pw };
       this.$http({
         method: "post",
-        url: "http://localhost:8082/ebook/users/check",
+        url: "/ebook/users/check",
         data: body
       }).then(response => {
         console.log("login response: " + response.data);

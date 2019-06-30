@@ -5,7 +5,7 @@
     title="详情"
     @close="$emit('update:isvisible', false);"
   >
-    <img :src="book.imgsrc" style="height:240px">
+    <img :src="'http://localhost:8082/ebook/image/' + book.imgId" style="height:240px">
     <p>书名:{{book.name}}</p>
     <p>作者:{{book.author}}</p>
     <p>ISBN:{{book.isbn}}</p>
@@ -30,7 +30,7 @@ export default {
       default: function() {
         return {
           id: 1,
-          imgsrc: "",
+          imgId: "",
           name: "",
           author: "",
           isbn: ""
@@ -43,7 +43,7 @@ export default {
       num: 1,
       visible: this.isvisible,
       book: {
-        imgsrc: "",
+        imgId: "",
         name: "",
         author: "",
         isbn: ""
@@ -75,7 +75,7 @@ export default {
       this.$http({
         method: "post",
         headers: { "Content-Type": "application/json" },
-        url: "http://localhost:8082/ebook/books/findbyid",
+        url: "/ebook/books/findbyid",
         data: this.thebook.id
       }).then(reponse => {
         this.book = reponse.data;

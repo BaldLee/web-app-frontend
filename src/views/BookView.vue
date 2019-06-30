@@ -2,7 +2,7 @@
   <div class="bookilst">
     <div v-for="item in books" :key="item.no">
       <div class="onebook" @click="showdetail(item)">
-        <img class="viewbookimg" :src="item.imgsrc">
+        <img class="viewbookimg" :src="'http://localhost:8082/ebook/image/' + item.imgId">
         <p>{{item.name}}</p>
       </div>
     </div>
@@ -21,8 +21,8 @@ export default {
   data: function() {
     return {
       booktoshow: {
-        id:1,
-        imgsrc: "",
+        id: 1,
+        imgId: "",
         name: "",
         author: "",
         isbn: ""
@@ -41,7 +41,7 @@ export default {
     },
     fetchdata: function() {
       this.$http
-        .post("http://localhost:8082/ebook/books/getall", {
+        .post("/ebook/books/getall", {
           headers: {
             "Content-Type": "application/json"
           }
@@ -57,14 +57,16 @@ export default {
 <style scoped>
 .onebook {
   text-align: center;
-  width: 240px;
+  width: 220px;
+  height: 320px;
   line-height: 20px;
   float: left;
-  margin-right: 50px;
-  margin-left: 30px;
+  padding-right: 50px;
+  padding-left: 30px;
+  padding-top: 30px;
 }
 .viewbookimg {
-  height: 240px;
+  width: 180px;
   margin: 0;
   padding: 0;
 }

@@ -2,7 +2,7 @@
   <div class="mycart">
     <div class="cartcol" v-for="(item,index) in cart" :key="index">
       <div class="cartimg">
-        <img :src="item.imgsrc" height="240px">
+        <img :src="'http://localhost:8082/ebook/image/' + item.imgId" height="240px">
       </div>
       <div class="cartinfo">
         <p>书名:{{item.name}}</p>
@@ -62,7 +62,7 @@ export default {
       console.log(JSON.stringify(request));
       this.$http({
         method: "post",
-        url: "http://localhost:8082/ebook/orders/add",
+        url: "/ebook/orders/add",
         headers: { "Content-Type": "application/json" },
         data: request
       }).then(response => {
