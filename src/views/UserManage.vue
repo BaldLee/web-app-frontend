@@ -65,7 +65,9 @@ export default {
           this.users = response.data;
           this.userintable = this.users;
           for (var i in this.userintable) {
-            this.userintable[i].roleString = this.therole(this.userintable[i].role);
+            this.userintable[i].roleString = this.therole(
+              this.userintable[i].role
+            );
           }
           console.log(this.users);
         });
@@ -79,15 +81,18 @@ export default {
   },
   watch: {
     searchword: function() {
-      if (this.searchword.length === 0) return;
-      this.userintable = [];
-      for (var i = 0; i < this.users.length; i++) {
-        if (
-          this.users[i].username
-            .toLowerCase()
-            .indexOf(this.searchword.toLowerCase()) > -1
-        ) {
-          this.userintable.push(this.users[i]);
+      if (this.searchword.length === 0) {
+        this.userintable = this.users;
+      } else {
+        this.userintable = [];
+        for (var i = 0; i < this.users.length; i++) {
+          if (
+            this.users[i].username
+              .toLowerCase()
+              .indexOf(this.searchword.toLowerCase()) > -1
+          ) {
+            this.userintable.push(this.users[i]);
+          }
         }
       }
     }
