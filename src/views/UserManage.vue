@@ -56,7 +56,7 @@ export default {
     },
     fetchdata: function() {
       this.$http
-        .post("http://localhost:8082/ebook/users/getall", {
+        .post("/ebook/users/getall", {
           headers: {
             "Content-Type": "application/json"
           }

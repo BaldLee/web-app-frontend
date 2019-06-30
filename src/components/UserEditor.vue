@@ -65,7 +65,7 @@ export default {
     edit() {
       this.$http({
         method: "post",
-        url: "http://localhost:8082/ebook/users/update",
+        url: "/ebook/users/update",
         headers: { "Content-Type": "application/json" },
         data: this.user
       }).then(response => {
@@ -78,7 +78,7 @@ export default {
     deleteuser() {
       this.$http({
         method: "post",
-        url: "http://localhost:8082/ebook/users/delete",
+        url: "/ebook/users/delete",
         headers: { "Content-Type": "application/json" },
         data: this.user.id
       }).then(response => {

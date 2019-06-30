@@ -48,7 +48,7 @@ export default {
       }
       this.$http({
         method: "post",
-        url: "http://localhost:8082/ebook/books/add",
+        url: "/ebook/books/add",
         data: this.newbook
       }).then(response => {
         console.log("add done: " + response.data);

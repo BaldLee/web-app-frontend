@@ -5,7 +5,7 @@
     title="编辑"
     @close="$emit('update:isvisible', false)"
   >
-    <img :src="book.imgsrc" style="height:240px">
+    <img :src="'http://localhost:8082/ebook/image/' + book.imgId" style="height:240px">
     <el-form ref="form" :model="book">
       <el-form-item label="书名">
         <el-input v-model="book.name"></el-input>
@@ -38,7 +38,7 @@ export default {
       type: Object,
       default: function() {
         return {
-          imgsrc: "",
+          imgId: "",
           name: "",
           author: "",
           isbn: ""
@@ -50,7 +50,7 @@ export default {
     return {
       visible: this.isvisible,
       book: {
-        imgsrc: "",
+        imgId: "",
         name: "",
         author: "",
         isbn: "",
@@ -60,16 +60,11 @@ export default {
       }
     };
   },
-  // computed: {
-  //   book: function() {
-  //     return JSON.parse(JSON.stringify(this.thebook));
-  //   }
-  // },
   methods: {
     edit() {
       this.$http({
         method: "post",
-        url: "http://localhost:8082/ebook/books/update",
+        url: "/ebook/books/update",
         headers: { "Content-Type": "application/json" },
         data: this.book
       }).then(response => {
@@ -82,7 +77,7 @@ export default {
     deletebook() {
       this.$http({
         method: "post",
-        url: "http://localhost:8082/ebook/books/delete",
+        url: "/ebook/books/delete",
         headers: { "Content-Type": "application/json" },
         data: this.book.id
       }).then(response => {

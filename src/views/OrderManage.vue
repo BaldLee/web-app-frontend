@@ -53,7 +53,7 @@ export default {
     fetchdata: function() {
       // var username = this.$global.username;
       this.$http
-        .post("http://localhost:8082/ebook/orders/getall", {
+        .post("/ebook/orders/getall", {
           headers: {
             "Content-Type": "application/json"
           }

@@ -32,7 +32,7 @@ export default {
       books: [],
       bookintable: [],
       booktoedit: {
-        imgsrc: "",
+        imgId: "",
         name: "",
         author: "",
         isbn: ""
@@ -58,7 +58,7 @@ export default {
     },
     fetchdata: function() {
       this.$http
-        .post("http://localhost:8082/ebook/books/getall", {
+        .post("/ebook/books/getall", {
           headers: {
             "Content-Type": "application/json"
           }
