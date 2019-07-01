@@ -1,5 +1,10 @@
 <template>
-  <div class="statistic">
+  <el-dialog
+    class="userstatic"
+    :visible.sync="visible"
+    title="用户统计"
+    @close="$emit('update:isvisible', false)"
+  >
     <p>选择日期</p>
     <div id="selector">
       <div id="timepicker">
@@ -21,14 +26,37 @@
       <br />
       累计购买书本：{{amount}} 本
     </p>
-  </div>
+  </el-dialog>
 </template>
-
 <script>
 export default {
-  name: "Statistic",
+  name: "UserDialog",
+  props: {
+    isvisible: {
+      type: Boolean,
+      default: false
+    },
+    theuser: {
+      type: Object,
+      default: function() {
+        return {
+          id: "",
+          username: "",
+          password: "",
+          email: ""
+        };
+      }
+    }
+  },
   data: function() {
     return {
+      visible: this.isvisible,
+      user: {
+        id: "",
+        username: "",
+        password: "",
+        email: ""
+      },
       dates: "",
       money: 0,
       amount: 0
@@ -42,7 +70,7 @@ export default {
       var request = {
         start: this.dates[0].getTime(),
         end: this.dates[1].getTime(),
-        username: this.$global.username
+        username: this.user.username
       };
       console.log(request.start);
       console.log(request.end);
@@ -57,19 +85,31 @@ export default {
         this.amount = response.data.amount;
       });
     }
+  },
+  watch: {
+    isvisible: function() {
+      this.visible = this.isvisible;
+      this.user = this.theuser;
+    }
   }
 };
 </script>
-
-<style scoped>
+<style>
+#userstatic {
+  color: #333;
+  text-align: center;
+  line-height: 50px;
+}
 #button {
-  float: left;
-  margin-left: 20px;
+  /* float: left; */
+  margin-top: 50px;
+  margin-right: 0px;
 }
 #timepicker {
-  float: left;
+  /* float: left; */
+  margin: 0px;
 }
 #selector {
-  margin-left: 430px;
+  margin-left: 0px;
 }
 </style>

@@ -7,7 +7,7 @@
   >
     <div class="itemscol" v-for="(item,index) in items" :key="index">
       <div class="itemsimg">
-        <img :src="'http://localhost:8082/ebook/image/' + item.book.imgId" height="40px">
+        <img :src="'http://localhost:8082/ebook/image/' + item.book.imgId" height="40px" />
       </div>
       <div class="itemsinfo">
         <span>
@@ -20,6 +20,7 @@
         </span>
       </div>
     </div>
+
     <p>
       <b>总价：</b>
       {{total}}

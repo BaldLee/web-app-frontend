@@ -22,6 +22,14 @@
           <i class="el-icon-menu"></i>
           <span slot="title">订单管理</span>
         </el-menu-item>
+        <el-menu-item index="6" @click="toUserStatic">
+          <i class="el-icon-menu"></i>
+          <span slot="title">用户统计</span>
+        </el-menu-item>
+        <el-menu-item index="7" @click="toBookStatic">
+          <i class="el-icon-menu"></i>
+          <span slot="title">书籍统计</span>
+        </el-menu-item>
       </el-menu>
     </el-col>
   </div>
@@ -48,6 +56,12 @@ export default {
     },
     toOrderManage: function() {
       this.$router.push("/admin/ordermanage");
+    },
+    toUserStatic:function(){
+      this.$router.push("/admin/userstatic")
+    },
+    toBookStatic:function(){
+      this.$router.push("/admin/bookstatic")
     }
   }
 };

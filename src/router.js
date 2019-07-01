@@ -13,6 +13,8 @@ import AddUser from './views/AddUser.vue'
 import OrderManage from './views/OrderManage.vue'
 import BookManage from './views/BookManage.vue'
 import Statistic from './views/Statistic.vue'
+import BookStatic from './views/BookStatic.vue'
+import UserStatic from './views/UserStatic.vue'
 
 Vue.use(Router)
 
@@ -86,6 +88,16 @@ export default new Router({
           name: 'OrderManage',
           component: OrderManage
         },
+        {
+          path: 'userstatic',
+          name: 'UserStatic',
+          component: UserStatic
+        },
+        {
+          path: 'bookstatic',
+          name: 'BookStatic',
+          component: BookStatic
+        }
       ]
     }
   ]
