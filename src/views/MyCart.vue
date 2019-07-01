@@ -64,7 +64,7 @@ export default {
         method: "post",
         url: "/ebook/orders/add",
         headers: { "Content-Type": "application/json" },
-        data: request
+        data: JSON.stringify(request)
       }).then(response => {
         var t = /too much:.*/;
         if (response.data === "order add done") {

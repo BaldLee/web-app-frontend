@@ -7,16 +7,16 @@
   >
     <div class="itemscol" v-for="(item,index) in items" :key="index">
       <div class="itemsimg">
-        <img :src="'http://localhost:8082/ebook/image/' + item.book.imgId" height="40px" />
+        <img :src="'http://localhost:8082/ebook/image/' + item.Book.imgId" height="40px" />
       </div>
       <div class="itemsinfo">
         <span>
           <b>书名:</b>
-          {{item.book.name}}
+          {{item.Book.name}}
           <b>价格:</b>
-          {{item.book.price}}
+          {{item.Book.price}}
           <b>数量：</b>
-          {{item.amount}}
+          {{item.Amount}}
         </span>
       </div>
     </div>
@@ -58,12 +58,12 @@ export default {
       visible: this.isvisible,
       order: this.orderid,
       items: {
-        book: {
+        Book: {
           name: "",
           price: "",
           imgId: ""
         },
-        amount: 0
+        Amount: 0
       }
     };
   },
@@ -71,7 +71,7 @@ export default {
     total: function() {
       var result = 0;
       for (var i = 0; i < this.items.length; i++) {
-        result += this.items[i].book.price * this.items[i].amount;
+        result += this.items[i].Book.price * this.items[i].Amount;
       }
       return result;
     }

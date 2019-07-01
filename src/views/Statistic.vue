@@ -63,13 +63,15 @@ export default {
 
 <style scoped>
 #button {
-  float: left;
-  margin-left: 20px;
+  float: center;
+  margin-left: 0px;
+
 }
 #timepicker {
-  float: left;
+  float: center;
+  margin-left:0px;
 }
 #selector {
-  margin-left: 430px;
+  margin-left: 0px;
 }
 </style>
