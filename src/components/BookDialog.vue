@@ -1,5 +1,10 @@
 <template>
-  <div class="statistic">
+  <el-dialog
+    class="bookstatic"
+    :visible.sync="visible"
+    title="书籍统计"
+    @close="$emit('update:isvisible', false)"
+  >
     <p>选择日期</p>
     <div id="selector">
       <div id="timepicker">
@@ -17,20 +22,34 @@
     </div>
     <p>
       <br />
-      累计消费金额: {{money}} 元
-      <br />
-      累计购买书本：{{amount}} 本
+      累计出售：{{amount}} 本
     </p>
-  </div>
+  </el-dialog>
 </template>
-
 <script>
 export default {
-  name: "Statistic",
+  name: "BookDialog",
+  props: {
+    isvisible: {
+      type: Boolean,
+      default: false
+    },
+    thebook: {
+      type: Object,
+      default: function() {
+        return {
+          id: ""
+        };
+      }
+    }
+  },
   data: function() {
     return {
+      visible: this.isvisible,
+      book: {
+        id: ""
+      },
       dates: "",
-      money: 0,
       amount: 0
     };
   },
@@ -42,34 +61,44 @@ export default {
       var request = {
         start: this.dates[0].getTime(),
         end: this.dates[1].getTime(),
-        username: this.$global.username
+        bookId: this.book.id
       };
-      console.log(request.start);
-      console.log(request.end);
+      console.log(request.bookId);
       let jsonstring = JSON.stringify(request);
       this.$http({
         method: "post",
         headers: { "Content-Type": "application/json" },
-        url: "/ebook/orders/addbytime",
+        url: "/ebook/orders/booksale",
         data: jsonstring
       }).then(response => {
-        this.money = response.data.money;
-        this.amount = response.data.amount;
+        this.amount = response.data;
       });
+    }
+  },
+  watch: {
+    isvisible: function() {
+      this.visible = this.isvisible;
+      this.book = this.thebook;
     }
   }
 };
 </script>
-
-<style scoped>
+<style>
+#bookstatic {
+  color: #333;
+  text-align: center;
+  line-height: 50px;
+}
 #button {
-  float: left;
-  margin-left: 20px;
+  /* float: left; */
+  margin-top: 50px;
+  margin-right: 0px;
 }
 #timepicker {
-  float: left;
+  /* float: left; */
+  margin: 0px;
 }
 #selector {
-  margin-left: 430px;
+  margin-left: 0px;
 }
 </style>
