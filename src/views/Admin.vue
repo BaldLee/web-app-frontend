@@ -30,6 +30,21 @@ export default {
     return {
       loginvisible: false
     };
+  },
+  created(){
+    let body = {username:this.$global.username,password:this.$global.password};
+    this.$http({
+      method:"post",
+      url:"/ebook/users/check",
+      data:body
+    }
+    ).then(response=>{
+      let result = response.data;
+      if(result != 1){
+        alert("请先登录！");
+        this.$router.push("/");
+      }
+    })
   }
 };
 </script>

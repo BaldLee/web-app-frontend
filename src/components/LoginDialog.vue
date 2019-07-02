@@ -48,11 +48,13 @@ export default {
         if (result === 0) {
           this.$router.push("/main/bookview");
           this.$global.username = this.form.id;
+          this.$global.password = this.form.pw;
           this.visible = false;
         }
         if (result === 1) {
           this.$router.push("/admin/bookmanage");
           this.$global.username = this.form.id;
+          this.$global.password = this.form.pw;
           this.visible = false;
         }
         if (result === 2) {
